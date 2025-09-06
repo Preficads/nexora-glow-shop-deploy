@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, ShoppingBag, Wrench } from 'lucide-react';
 import heroLaptop from '@/assets/hero-laptop.jpg';
@@ -17,7 +18,6 @@ const HeroSection = () => {
       image: heroLaptop,
       cta: "Shop Laptops",
       price: "Starting from ₹25,000",
-      gradient: "from-glass-primary to-glass-secondary"
     },
     {
       id: 2,
@@ -27,7 +27,6 @@ const HeroSection = () => {
       image: cctvSystem,
       cta: "View Systems",
       price: "Complete setup from ₹15,000",
-      gradient: "from-glass-secondary to-glass-accent"
     },
     {
       id: 3,
@@ -37,25 +36,18 @@ const HeroSection = () => {
       image: automationKit,
       cta: "Explore Automation",
       price: "Kits starting ₹8,000",
-      gradient: "from-glass-accent to-glass-primary"
     }
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
+    }, 6000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const current = slides[currentSlide];
 
@@ -68,70 +60,101 @@ const HeroSection = () => {
           alt={current.title}
           className="w-full h-full object-cover transition-transform duration-700 scale-105"
         />
-        <div className={`absolute inset-0 bg-gradient-to-r ${current.gradient} opacity-80`} />
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black-950 to-black opacity-50" />
       </div>
 
       {/* Content */}
       <div className="relative h-full flex items-center">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl">
-            <div className="glass-premium p-8 rounded-3xl border border-white/20">
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                {current.title}
-              </h1>
-              <p className="text-xl lg:text-2xl text-white/90 mb-2 font-medium">
-                {current.subtitle}
-              </p>
-              <p className="text-white/80 mb-6 text-lg leading-relaxed">
-                {current.description}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <Button 
-                  variant="premium" 
-                  size="lg"
-                  className="text-lg px-8 py-3 shadow-2xl"
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -40, scale: 0.95 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="max-w-2xl"
+            >
+              {/* Glass Morphism Card */}
+              <div className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/30 shadow-2xl">
+                <motion.h1
+                  className="text-4xl lg:text-6xl font-bold text-white mb-4 leading-tight drop-shadow-md"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
                 >
-                  <ShoppingBag className="w-5 h-5 mr-2" />
-                  {current.cta}
-                </Button>
-                <Button 
-                  variant="glass-outline" 
-                  size="lg"
-                  className="text-white border-white/40 hover:bg-white/10 text-lg px-8 py-3"
-                >
-                  <Wrench className="w-5 h-5 mr-2" />
-                  Book Service
-                </Button>
-              </div>
+                  {current.title}
+                </motion.h1>
 
-              <div className="mt-6 pt-6 border-t border-white/20">
-                <p className="text-white/90 font-semibold text-lg">
-                  {current.price}
-                </p>
-                <p className="text-white/70 text-sm">
-                  Free delivery • 1 Year warranty • Expert support
-                </p>
+                <motion.p
+                  className="text-xl lg:text-2xl text-white/90 mb-2 font-medium"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  {current.subtitle}
+                </motion.p>
+
+                <motion.p
+                  className="text-white/80 mb-6 text-lg leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  {current.description}
+                </motion.p>
+
+                {/* Buttons */}
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-4 items-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Button
+                    size="lg"
+                    className="text-lg px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-900 text-white font-semibold rounded-xl shadow-xl hover:scale-105 transition-transform duration-300"
+                  >
+                    <ShoppingBag className="w-5 h-5 mr-2" />
+                    {current.cta}
+                  </Button>
+                  <Button
+                    size="lg"
+                    className="text-lg px-8 py-3 border border-white/50 bg-white/10 text-white rounded-xl backdrop-blur-md hover:bg-white/20 shadow-lg"
+                  >
+                    <Wrench className="w-5 h-5 mr-2" />
+                    Book Service
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  className="mt-6 pt-6 border-t border-white/20"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <p className="text-white/90 font-semibold text-lg">{current.price}</p>
+                  <p className="text-white/70 text-sm">
+                    Free delivery • 1 Year warranty • Expert support
+                  </p>
+                </motion.div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
       {/* Navigation arrows */}
       <Button
-        variant="glass"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/30"
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/40 bg-white/10 backdrop-blur-md hover:bg-white/20 shadow-lg"
         onClick={prevSlide}
       >
         <ChevronLeft className="w-6 h-6 text-white" />
       </Button>
       <Button
-        variant="glass"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/30"
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/40 bg-white/10 backdrop-blur-md hover:bg-white/20 shadow-lg"
         onClick={nextSlide}
       >
         <ChevronRight className="w-6 h-6 text-white" />
@@ -144,20 +167,12 @@ const HeroSection = () => {
             key={index}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? 'bg-white scale-125'
+                ? 'bg-white scale-125 shadow-md'
                 : 'bg-white/50 hover:bg-white/70'
             }`}
             onClick={() => setCurrentSlide(index)}
           />
         ))}
-      </div>
-
-      {/* Floating elements */}
-      <div className="absolute top-20 right-10 animate-pulse">
-        <div className="w-2 h-2 bg-white/60 rounded-full"></div>
-      </div>
-      <div className="absolute bottom-32 left-20 animate-pulse delay-1000">
-        <div className="w-1 h-1 bg-white/40 rounded-full"></div>
       </div>
     </section>
   );

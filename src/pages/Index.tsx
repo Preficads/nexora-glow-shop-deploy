@@ -4,6 +4,17 @@ import ProductCard from '@/components/ProductCard';
 import OfferPopup from '@/components/OfferPopup';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Star, ShieldCheck, Phone, Mail, MapPin, Laptop, Cctv, Wrench, Package } from 'lucide-react';
+import dealsBg from "@/assets/deals-bg.jpg"; // ✅ New background image
+import nexoraLogo from "@/assets/nexora-logo-white.png"; // ✅ Nexora logo
+import dellInspironImg from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg";
+import hpr5laptop from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import lenovothinkpad from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import externalhdd from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import cctvimg from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import  laptopcharger from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import automation from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import printerimg from "@/assets/Dell Inspiron 15 3000 i5 Laptop.jpg"
+import preownedi3 from "@/assets/laptop-deal.png"
 
 // Sample product data
 const popularProducts = [
@@ -12,7 +23,7 @@ const popularProducts = [
     name: 'Dell Inspiron 15 3000 i5 Laptop',
     price: 35000,
     originalPrice: 42000,
-    image: '/api/placeholder/300/200',
+    image: dellInspironImg, // ✅ Use actual image
     rating: 4.5,
     reviews: 128,
     discount: 16,
@@ -23,7 +34,7 @@ const popularProducts = [
     id: '2',
     name: 'HP Pavilion Ryzen 5 Gaming Laptop',
     price: 42500,
-    image: '/api/placeholder/300/200',
+    image: hpr5laptop,
     rating: 4.7,
     reviews: 89,
     category: 'Gaming'
@@ -33,7 +44,7 @@ const popularProducts = [
     name: 'Lenovo ThinkPad Pre-owned',
     price: 24000,
     originalPrice: 35000,
-    image: '/api/placeholder/300/200',
+    image: lenovothinkpad,
     rating: 4.3,
     reviews: 67,
     discount: 31,
@@ -43,7 +54,7 @@ const popularProducts = [
     id: '4',
     name: '1TB External HDD',
     price: 4500,
-    image: '/api/placeholder/300/200',
+    image: externalhdd,
     rating: 4.6,
     reviews: 234,
     category: 'Storage'
@@ -56,7 +67,7 @@ const featuredProducts = [
     name: 'CCTV HD Camera Kit (4 Cameras)',
     price: 12800,
     originalPrice: 15000,
-    image: '/api/placeholder/300/200',
+    image: cctvimg,
     rating: 4.8,
     reviews: 45,
     discount: 15,
@@ -66,7 +77,7 @@ const featuredProducts = [
     id: '6',
     name: 'Laptop Charger (HP/Dell Compatible)',
     price: 1200,
-    image: '/api/placeholder/300/200',
+    image: laptopcharger,
     rating: 4.4,
     reviews: 156,
     category: 'Accessories'
@@ -75,7 +86,7 @@ const featuredProducts = [
     id: '7',
     name: 'Smart Home Automation Kit',
     price: 8500,
-    image: '/api/placeholder/300/200',
+    image: automation,
     rating: 4.6,
     reviews: 78,
     category: 'Automation',
@@ -86,7 +97,7 @@ const featuredProducts = [
     name: 'Epson L3250 WiFi Printer',
     price: 9500,
     originalPrice: 12000,
-    image: '/api/placeholder/300/200',
+    image: printerimg,
     rating: 4.5,
     reviews: 92,
     discount: 21,
@@ -99,7 +110,7 @@ const dealOfTheDay = {
   name: 'Pre-owned i3 Laptop - Certified Refurbished',
   price: 15999,
   originalPrice: 20999,
-  image: '/api/placeholder/400/300',
+  image: preownedi3,
   rating: 4.2,
   reviews: 143,
   discount: 24,
@@ -195,9 +206,12 @@ const Index = () => {
       </section>
 
       {/* Deal of the Day */}
-      <section className="py-16 px-4 bg-gradient-to-r from-glass-primary-dark to-glass-secondary">
+      <section
+        className="py-16 px-4 bg-cover bg-center"
+        style={{ backgroundImage: `url(${dealsBg})` }}
+      >
         <div className="container mx-auto">
-          <div className="glass-premium rounded-3xl p-8 border border-white/20">
+          <div className="glass-premium rounded-3xl p-8 border border-white/20 bg-black/50 backdrop-blur-md">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-2">Deal of the Day</h2>
               <p className="text-white/80">Limited time offer - Don't miss out!</p>
@@ -263,21 +277,19 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-transparent to-glass-card-dark text-foreground py-16">
+      <footer className="bg-gray-900 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             {/* Company Info */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-glass-primary to-glass-secondary flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">N</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">Nexora Solutions</h3>
-                  <p className="text-sm text-muted-foreground">Electronics & Services</p>
-                </div>
+                <img
+                  src={nexoraLogo}
+                  alt="Nexora Solutions"
+                  className="h-12 w-auto"
+                />
               </div>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-gray-400 mb-4">
                 "We repair, sell, and service electronics – at your doorstep."
               </p>
               <div className="space-y-2">
@@ -300,10 +312,10 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="/shop" className="text-muted-foreground hover:text-glass-primary transition-colors">Shop All Products</a></li>
-                <li><a href="/booking" className="text-muted-foreground hover:text-glass-primary transition-colors">Book Service</a></li>
-                <li><a href="/contact" className="text-muted-foreground hover:text-glass-primary transition-colors">Contact Us</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-glass-primary transition-colors">Track Order</a></li>
+                <li><a href="/shop" className="text-gray-400 hover:text-white transition-colors">Shop All Products</a></li>
+                <li><a href="/booking" className="text-gray-400 hover:text-white transition-colors">Book Service</a></li>
+                <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Track Order</a></li>
               </ul>
             </div>
 
@@ -311,16 +323,16 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Categories</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-muted-foreground hover:text-glass-primary transition-colors">Laptops</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-glass-primary transition-colors">CCTV Systems</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-glass-primary transition-colors">Accessories</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-glass-primary transition-colors">Pre-owned</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Laptops</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">CCTV Systems</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Accessories</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Pre-owned</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-glass-primary/20 pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
+          <div className="border-t border-gray-700 pt-8 text-center">
+            <p className="text-sm text-gray-500">
               © 2024 Nexora Solutions. All rights reserved.
             </p>
           </div>

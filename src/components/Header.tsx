@@ -4,13 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, ShoppingCart, Menu, X, Phone, Mail } from 'lucide-react';
 
+// Import your logos
+import LogoBlack from '@/assets/nexora-logo-black.png';
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full glass-premium border-b border-glass-primary/20">
       {/* Top bar with contact info */}
-      <div className="hidden lg:flex justify-between items-center px-6 py-2 bg-gradient-to-r from-glass-primary to-glass-secondary text-white text-sm">
+      <div className="hidden lg:flex justify-between items-center px-6 py-2 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <Phone className="w-3 h-3" />
@@ -31,13 +34,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-glass-primary to-glass-secondary flex items-center justify-center">
-              <span className="text-white font-bold text-lg">N</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground">Nexora Solutions</h1>
-              <p className="text-xs text-muted-foreground">Electronics & Services</p>
-            </div>
+            <img
+              src={LogoBlack}
+              alt="Nexora Solutions Logo"
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Search bar - desktop */}
@@ -50,7 +51,7 @@ const Header = () => {
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
             </div>
-            <Button variant="glass-primary" className="ml-2 rounded-full px-6">
+            <Button className="ml-2 rounded-full px-6 bg-gray-900 text-white hover:bg-gray-800">
               Search
             </Button>
           </div>
@@ -69,9 +70,12 @@ const Header = () => {
             <Link to="/contact" className="text-foreground hover:text-glass-primary transition-colors">
               Contact
             </Link>
-            <Button variant="glass-outline" size="sm" className="relative">
+            <Button
+              size="sm"
+              className="relative bg-gray-900 text-white hover:bg-gray-800 rounded-full px-4"
+            >
               <ShoppingCart className="w-4 h-4" />
-              <span className="absolute -top-2 -right-2 bg-glass-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 0
               </span>
             </Button>
@@ -133,11 +137,11 @@ const Header = () => {
                 Contact
               </Link>
               <div className="flex gap-2 pt-2">
-                <Button variant="glass-primary" className="flex-1">
+                <Button className="flex-1 bg-gray-900 text-white hover:bg-gray-800 rounded-full">
                   <Phone className="w-4 h-4 mr-2" />
                   Call Now
                 </Button>
-                <Button variant="glass-outline" size="icon">
+                <Button className="bg-gray-900 text-white hover:bg-gray-800 rounded-full">
                   <ShoppingCart className="w-4 h-4" />
                 </Button>
               </div>

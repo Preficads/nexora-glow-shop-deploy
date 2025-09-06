@@ -40,111 +40,101 @@ const OfferPopup = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-      <div className="glass-premium max-w-md w-full rounded-2xl overflow-hidden border-2 border-glass-primary/30 animate-in fade-in-0 zoom-in-95 duration-300">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-[100] p-4">
+      {/* Glassmorphism CARD with inner blur */}
+      <div className="relative max-w-md w-full rounded-2xl p-6 shadow-2xl
+        bg-white/10 border border-white/20 backdrop-blur-xl
+        animate-in fade-in-0 zoom-in-95 duration-300">
+
+        {/* Close button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-3 right-3 text-white hover:bg-white/20"
+          onClick={() => setIsVisible(false)}
+        >
+          <X className="w-5 h-5" />
+        </Button>
+
         {/* Header */}
-        <div className="bg-gradient-to-r from-glass-primary to-glass-secondary p-6 text-white relative">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-2 right-2 text-white hover:bg-white/20"
-            onClick={() => setIsVisible(false)}
-          >
-            <X className="w-4 h-4" />
-          </Button>
-          
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Zap className="w-6 h-6" />
-              <h2 className="text-xl font-bold">Flash Sale Alert!</h2>
-            </div>
-            <p className="text-white/90">Limited Time Offers</p>
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center gap-2 mb-2 text-white">
+            <Zap className="w-6 h-6" />
+            <h2 className="text-xl font-bold">Flash Sale Alert!</h2>
+          </div>
+          <p className="text-white/80">Limited Time Offers</p>
+        </div>
+
+        {/* Countdown */}
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Timer className="w-5 h-5 text-blue-400" />
+            <span className="text-sm text-gray-200">Ends in:</span>
+          </div>
+          <div className="flex justify-center gap-3">
+            {['Hours', 'Min', 'Sec'].map((label, idx) => {
+              const values = [
+                timeLeft.hours.toString().padStart(2, '0'),
+                timeLeft.minutes.toString().padStart(2, '0'),
+                timeLeft.seconds.toString().padStart(2, '0')
+              ];
+              return (
+                <div key={label} className="px-4 py-2 rounded-lg text-center bg-white/10 border border-white/20">
+                  <div className="text-lg font-bold text-white">{values[idx]}</div>
+                  <div className="text-xs text-gray-300">{label}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-6">
-          {/* Countdown Timer */}
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Timer className="w-5 h-5 text-glass-primary" />
-              <span className="text-sm text-muted-foreground">Ends in:</span>
+        {/* Offers */}
+        <div className="space-y-4 text-white">
+          <div className="flex items-center gap-3 bg-white/10 border border-green-300/30 rounded-lg p-4">
+            <Package className="w-8 h-8 text-green-300" />
+            <div className="flex-1">
+              <h3 className="font-semibold">Accessories in Stock</h3>
+              <p className="text-sm text-gray-300">SSDs, RAMs, Chargers & More</p>
             </div>
-            <div className="flex justify-center gap-2">
-              <div className="glass-card px-3 py-2 rounded-lg text-center border border-glass-primary/30">
-                <div className="text-lg font-bold text-glass-primary">{timeLeft.hours.toString().padStart(2, '0')}</div>
-                <div className="text-xs text-muted-foreground">Hours</div>
-              </div>
-              <div className="glass-card px-3 py-2 rounded-lg text-center border border-glass-primary/30">
-                <div className="text-lg font-bold text-glass-primary">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-                <div className="text-xs text-muted-foreground">Min</div>
-              </div>
-              <div className="glass-card px-3 py-2 rounded-lg text-center border border-glass-primary/30">
-                <div className="text-lg font-bold text-glass-primary">{timeLeft.seconds.toString().padStart(2, '0')}</div>
-                <div className="text-xs text-muted-foreground">Sec</div>
-              </div>
+            <span className="text-lg font-bold text-green-300">₹500+ OFF</span>
+          </div>
+
+          <div className="flex items-center gap-3 bg-white/10 border border-yellow-300/30 rounded-lg p-4">
+            <Percent className="w-8 h-8 text-yellow-300" />
+            <div className="flex-1">
+              <h3 className="font-semibold">Pre-owned i3 Laptop</h3>
+              <p className="text-sm text-gray-300">Certified with 1 Year Warranty</p>
+            </div>
+            <div className="text-right">
+              <div className="text-sm line-through text-gray-400">₹20,999</div>
+              <span className="text-lg font-bold text-yellow-300">₹15,999</span>
             </div>
           </div>
 
-          {/* Offers */}
-          <div className="space-y-4">
-            <div className="glass-card p-4 rounded-lg border border-glass-success/30">
-              <div className="flex items-center gap-3">
-                <Package className="w-8 h-8 text-glass-success" />
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground">Accessories in Stock</h3>
-                  <p className="text-sm text-muted-foreground">SSDs, RAMs, Chargers & More</p>
-                </div>
-                <div className="text-right">
-                  <span className="text-lg font-bold text-glass-success">₹500+ OFF</span>
-                </div>
-              </div>
+          <div className="flex items-center gap-3 bg-white/10 border border-pink-300/30 rounded-lg p-4">
+            <Zap className="w-8 h-8 text-pink-300" />
+            <div className="flex-1">
+              <h3 className="font-semibold">Festive Sale</h3>
+              <p className="text-sm text-gray-300">Up to 30% OFF on Electronics</p>
             </div>
-
-            <div className="glass-card p-4 rounded-lg border border-glass-warning/30">
-              <div className="flex items-center gap-3">
-                <Percent className="w-8 h-8 text-glass-warning" />
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground">Pre-owned i3 Laptop</h3>
-                  <p className="text-sm text-muted-foreground">Certified with 1 Year Warranty</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm line-through text-muted-foreground">₹20,999</div>
-                  <span className="text-lg font-bold text-glass-warning">₹15,999</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card p-4 rounded-lg border border-glass-accent/30">
-              <div className="flex items-center gap-3">
-                <Zap className="w-8 h-8 text-glass-accent" />
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground">Festive Sale</h3>
-                  <p className="text-sm text-muted-foreground">Up to 30% OFF on Electronics</p>
-                </div>
-                <div className="text-right">
-                  <span className="text-lg font-bold text-glass-accent">30% OFF</span>
-                </div>
-              </div>
-            </div>
+            <span className="text-lg font-bold text-pink-300">30% OFF</span>
           </div>
+        </div>
 
-          {/* CTA Buttons */}
-          <div className="flex gap-3 mt-6">
-            <Button 
-              variant="glass-primary" 
-              className="flex-1"
-              onClick={() => setIsVisible(false)}
-            >
-              Shop Now
-            </Button>
-            <Button 
-              variant="glass-outline"
-              onClick={() => setIsVisible(false)}
-            >
-              Maybe Later
-            </Button>
-          </div>
+        {/* Buttons */}
+        <div className="flex gap-3 mt-6">
+          <Button 
+            className="flex-1 bg-gradient-to-r from-blue-500 to-black-500 text-white rounded-lg shadow-md hover:opacity-90"
+            onClick={() => setIsVisible(false)}
+          >
+            Shop Now
+          </Button>
+          <Button 
+            className="flex-1 bg-white/20 text-white border border-white/30 rounded-lg hover:bg-white/30"
+            onClick={() => setIsVisible(false)}
+          >
+            Maybe Later
+          </Button>
         </div>
       </div>
     </div>
