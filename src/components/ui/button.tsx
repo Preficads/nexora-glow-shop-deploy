@@ -15,6 +15,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        
+        // Premium glassmorphism variants
+        glass: "glass-card text-foreground hover:bg-glass-card/80 border-glass-primary/30 hover:border-glass-primary/50 transition-all duration-300",
+        "glass-primary": "bg-gradient-to-r from-glass-primary to-glass-secondary text-white hover:from-glass-primary-dark hover:to-glass-primary shadow-lg hover:shadow-xl transition-all duration-300",
+        "glass-outline": "border-2 border-glass-primary/40 bg-transparent text-glass-primary hover:bg-glass-primary/10 hover:border-glass-primary/60 backdrop-blur-sm transition-all duration-300",
+        premium: "glow-border bg-gradient-to-r from-glass-primary to-glass-secondary text-white hover:shadow-2xl transform hover:-translate-y-0.5 transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",

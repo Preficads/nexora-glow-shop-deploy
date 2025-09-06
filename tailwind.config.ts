@@ -19,9 +19,23 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        
+        /* Glassmorphism color system */
+        glass: {
+          primary: "hsl(var(--glass-primary))",
+          "primary-dark": "hsl(var(--glass-primary-dark))",
+          secondary: "hsl(var(--glass-secondary))",
+          accent: "hsl(var(--glass-accent))",
+          success: "hsl(var(--glass-success))",
+          warning: "hsl(var(--glass-warning))",
+          card: "hsl(var(--card-glass))",
+          "card-dark": "hsl(var(--card-glass-dark))",
+        },
+        
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
